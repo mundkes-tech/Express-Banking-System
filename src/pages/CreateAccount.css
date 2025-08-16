@@ -1,0 +1,49 @@
+.form-container {
+  padding: 3rem 2rem;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.account-form input, .account-form button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.account-form button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.account-form button:hover {
+  background-color: #1e3a8a;
+}
+
+.message {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: green;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
