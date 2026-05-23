@@ -1,6 +1,6 @@
 .transfer-container {
   padding: 3rem 2rem;
-  max-width: 500px;
+  max-width: 700px;
   margin: auto;
   text-align: center;
 }
@@ -12,7 +12,10 @@
   animation: fadeIn 0.5s ease;
 }
 
-.transfer-form input, .transfer-form button {
+.transfer-form input,
+.transfer-form select,
+.transfer-form textarea,
+.transfer-form button {
   padding: 0.75rem;
   font-size: 1rem;
   border-radius: 0.5rem;
@@ -35,4 +38,20 @@
   margin-top: 1rem;
   font-weight: bold;
   color: green;
+}
+
+.transfer-note {
+  margin: 0.75rem 0 1.25rem;
+  color: #475569;
+}
+
+.transfer-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.transfer-form textarea {
+  resize: vertical;
 }

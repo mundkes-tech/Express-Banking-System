@@ -1,0 +1,218 @@
+.container {
+  padding: clamp(1rem, 3vw, 2rem);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.error-box {
+  background-color: #fee;
+  color: #c00;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.transactions-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.transaction-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.transaction-card:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.txn-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.txn-header h3 {
+  margin: 0;
+  color: #667eea;
+}
+
+.amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.txn-details {
+  margin-bottom: 1rem;
+}
+
+.txn-details p {
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.badge.approved {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.txn-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.transactions-list {
+  overflow-x: auto;
+}
+
+.btn-approve, .btn-reject, .btn-cancel {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.btn-approve {
+  background-color: #27ae60;
+  color: white;
+}
+
+.btn-approve:hover {
+  background-color: #229954;
+}
+
+.btn-reject {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-reject:hover {
+  background-color: #c0392b;
+}
+
+.btn-cancel {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #7f8c8d;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal h3 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.modal-content {
+  margin-bottom: 1.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.modal-content p {
+  margin: 0.75rem 0;
+  color: #555;
+}
+
+.modal-content textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit;
+  margin-top: 1rem;
+  min-height: 100px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .txn-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .amount {
+    margin-top: 0.5rem;
+  }
+
+  .txn-actions,
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .btn-approve, .btn-reject, .btn-cancel {
+    width: 100%;
+  }
+
+  .modal {
+    width: 95%;
+  }
+}

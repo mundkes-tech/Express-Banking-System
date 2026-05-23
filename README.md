@@ -1,170 +1,81 @@
-# 🚀 Express Banking System
+# Express Banking System
 
-A full-stack banking management application built with React and Express.js, designed to simulate real-world banking operations in a secure, reliable, and user-friendly environment.
+A full-stack banking system built with React, Express, and MongoDB with JWT authentication, validated APIs, and persistent transaction history.
 
-This project demonstrates clean architecture, modular backend design, and structured data handling using custom data structures.
+## Features
 
-## 🌟 Key Features
+- User registration and login with hashed passwords and JWT auth
+- Protected banking APIs (per-user account ownership)
+- Create account with account type (SAVINGS/CHECKING)
+- Dashboard listing account number, type, status, and balance
+- Transfer funds between your own accounts
+- Deposit and withdraw operations
+- Balance lookup and transaction history
+- Account update and delete endpoints
+- Security middleware: helmet, rate limiting, validation, request logging
 
-### 🧾 Account Management
-- Create new bank accounts with an initial balance
-- Automatically generates a unique account number
+## Tech Stack
 
-### 📊 Interactive Dashboard
-- View all accounts in a clean, responsive table
-- Displays account number, holder name, and balance
+- Frontend: React, React Router, Axios
+- Backend: Node.js, Express.js
+- Database: MongoDB (Mongoose)
+- Auth/Security: JWT, bcryptjs, helmet, express-rate-limit, express-validator
 
-### 💸 Secure Fund Transfers
-- Transfer money between accounts
-- Validates sufficient balance before processing
+## Environment Setup
 
-### 💰 Balance Inquiry
-- Retrieve live account balance by account number
+1. Copy `.env.example` to `.env`
+2. Configure values:
 
-### 🧩 Modern Frontend UI
-- Built with React & React Router
-- Intuitive navigation and responsive layout
-
-### 🛡️ Robust Backend API
-- RESTful Express.js services
-- CORS-enabled for cross-origin requests
-
-### 🧠 Custom Data Structures
-- In-memory storage using LinkedList
-- Object-oriented Account model
-
-## 🛠️ Tech Stack
-
-### 🎨 Frontend
-- React
-- React Router DOM
-- Axios
-- Custom CSS
-
-### ⚙️ Backend
-- Node.js
-- Express.js
-- CORS
-
-### 🗂️ Data Structures
-- Custom LinkedList
-- Account and Node models
-
-## ⚡ Getting Started
-
-### 1️⃣ Clone the Repository
-```bash
-git clone https://github.com/your-username/express-banking-system.git
-cd express-banking-system
+```env
+PORT=5000
+MONGO_URI=mongodb://127.0.0.1:27017/express_bank
+JWT_SECRET=replace_with_strong_secret
+CLIENT_URL=http://localhost:3000
+REACT_APP_API_URL=http://localhost:5000/api
 ```
 
-### 2️⃣ Install Dependencies
+## Run Locally
+
+Install dependencies:
+
 ```bash
 npm install
 ```
 
-### 3️⃣ Start Backend Server
-```bash
-node src/server/server.js
-```
-Runs at → `http://localhost:5000`
+Run backend + frontend together:
 
-### 4️⃣ Start React App
 ```bash
+npm run dev
+```
+
+Or run separately:
+
+```bash
+npm run server
 npm start
 ```
-Opens at → `http://localhost:3000`
 
-## 📘 Application Usage
+## API Overview
 
-### ➕ Create Account
-1. Open Create Account
-2. Enter:
-   - Account holder name
-   - Initial balance
-3. Submit — account gets generated with a unique ID
+### Auth
 
-### 📂 View Accounts
-- Navigate to Dashboard
-- View all accounts in a tabular format
+- `POST /api/auth/register`
+- `POST /api/auth/login`
 
-### 🔁 Transfer Funds
-1. Open Transfer Funds
-2. Enter:
-   - Sender account number
-   - Receiver account number
-   - Transfer amount
-3. Balance validation ensures safe transactions
+### Bank (Protected: Bearer token required)
 
-### 🔎 Check Balance
-1. Open Check Balance
-2. Enter account number
-3. View current balance instantly
+- `POST /api/bank/create`
+- `GET /api/bank/accounts`
+- `POST /api/bank/transfer`
+- `POST /api/bank/deposit`
+- `POST /api/bank/withdraw`
+- `GET /api/bank/balance/:accountNumber`
+- `GET /api/bank/transactions/:accountNumber`
+- `PATCH /api/bank/accounts/:accountNumber`
+- `DELETE /api/bank/accounts/:accountNumber`
 
-## 🔌 API Overview
+## Notes
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST   | `/api/bank/create`     | Create new account |
-| GET    | `/api/bank/accounts`   | Get all accounts |
-| POST   | `/api/bank/transfer`   | Transfer funds |
-| GET    | `/api/bank/balance/:accountNumber` | Get account balance |
-
-### 🧪 Example Requests
-
-**Create Account:**
-```bash
-curl -X POST http://localhost:5000/api/bank/create \
--H "Content-Type: application/json" \
--d '{"name": "John Doe", "balance": 1000}'
-```
-
-**Transfer Funds:**
-```bash
-curl -X POST http://localhost:5000/api/bank/transfer \
--H "Content-Type: application/json" \
--d '{"fromAccount": 1001, "toAccount": 1002, "amount": 500}'
-```
-
-## 🗂️ Project Structure
-```
-expbanksys/
-├── public/
-├── src/
-│   ├── components/
-│   ├── controllers/
-│   ├── models/
-│   ├── pages/
-│   ├── routes/
-│   ├── server/
-│   ├── App.js / App.css
-│   └── index.js
-└── package.json
-```
-
-## 🧪 Testing
-
-Run tests:
-```bash
-npm test
-```
-
-## 🤝 Contributing
-
-1. Fork repo
-2. Create feature branch
-3. Commit changes
-4. Push branch
-5. Open Pull Request
-
-## 📜 License
-
-Licensed under the MIT License — see LICENSE for details.
-
-## 📬 Support
-
-For questions, feedback, or feature suggestions — please open an issue in the repository.
-
----
-
-❤️ Built with passion using React & Express.js
+- Backend data is now persistent in MongoDB.
+- All bank operations are scoped to the authenticated user.
+- Frontend routes for account actions are protected via login.

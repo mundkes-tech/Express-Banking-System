@@ -1,22 +1,55 @@
 .form-container {
-  padding: 3rem 2rem;
-  max-width: 500px;
+  padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
+  max-width: 900px;
   margin: auto;
+}
+
+.form-container h2 {
   text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  text-align: center;
+  color: #5b6475;
+  margin-bottom: 1.5rem;
 }
 
 .account-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   animation: fadeIn 0.6s ease-in-out;
 }
 
-.account-form input, .account-form button {
-  padding: 0.75rem;
+.section-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.section-card h3 {
+  margin: 0 0 0.25rem;
+  color: #1f2a44;
+}
+
+.account-form input,
+.account-form select,
+.account-form button {
+  padding: 0.8rem 0.95rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+}
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
 }
 
 .account-form button {
@@ -25,25 +58,71 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: fit-content;
+  align-self: center;
+  min-width: 180px;
 }
 
 .account-form button:hover {
   background-color: #1e3a8a;
 }
 
-.message {
-  margin-top: 1rem;
-  font-weight: bold;
-  color: green;
+.account-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.section-card input,
+.section-card select,
+.section-card textarea {
+  width: 100%;
+}
+
+.success-box {
+  margin-top: 1.25rem;
+  background: #ecfdf3;
+  border: 1px solid #86efac;
+  color: #166534;
+  border-radius: 0.85rem;
+  padding: 1rem 1.15rem;
+}
+
+.success-box p {
+  margin: 0.35rem 0;
+}
+
+.success-action {
+  margin-top: 0.85rem;
+  background: #0f766e;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+.success-action:hover {
+  background: #115e59;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .two-col-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-form button {
+    width: 100%;
+    min-width: 0;
   }
 }

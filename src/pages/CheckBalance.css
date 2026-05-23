@@ -1,6 +1,6 @@
 .balance-container {
-  padding: 3rem 2rem;
-  max-width: 500px;
+  padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
+  max-width: 700px;
   margin: auto;
   text-align: center;
 }
@@ -12,7 +12,9 @@
   animation: fadeIn 0.5s ease;
 }
 
-.balance-form input, .balance-form button {
+.balance-form input,
+.balance-form select,
+.balance-form button {
   padding: 0.75rem;
   font-size: 1rem;
   border-radius: 0.5rem;
@@ -41,4 +43,94 @@
   margin-top: 1rem;
   font-weight: bold;
   color: red;
+}
+
+.result-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #ecfdf5;
+  border: 1px solid #86efac;
+}
+
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.account-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+@media (max-width: 640px) {
+  .account-table thead {
+    display: none;
+  }
+
+  .account-table,
+  .account-table tbody,
+  .account-table tr,
+  .account-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .account-table tr {
+    margin-bottom: 0.85rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  }
+
+  .account-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.8rem 0.9rem;
+    border-bottom: 1px solid #eef2f7;
+  }
+
+  .account-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #475569;
+    flex: 0 0 35%;
+  }
+
+  .account-table td:last-child {
+    border-bottom: none;
+  }
+
+  .account-table tbody td:last-child {
+    justify-content: flex-end;
+  }
+
+  .balance-form button,
+  .balance-form input,
+  .balance-form select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .balance-container {
+    padding-top: 1rem;
+  }
+
+  .balance-form button,
+  .balance-form input,
+  .balance-form select {
+    width: 100%;
+  }
+
+  .account-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
