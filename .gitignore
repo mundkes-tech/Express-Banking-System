@@ -37,10 +37,3 @@ backend/.cache/
 frontend/.eslintcache
 backend/.eslintcache
 
-# Ignore any nested node_modules folders that can cause Windows path length errors
-**/node_modules/
-
-# Ignore accidental nested repository copies (appear in this repo)
-backend/backend/
-backend/frontend/
-

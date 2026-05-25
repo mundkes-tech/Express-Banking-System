@@ -56,6 +56,38 @@ const KYCVerify = () => {
     }
   };
 
+  const renderDocumentPreview = (docRef) => {
+    if (!docRef) return null;
+    const lower = String(docRef).toLowerCase();
+    // if looks like URL or blob, render preview
+    if (lower.startsWith('http') || lower.startsWith('blob:')) {
+      if (lower.endsWith('.pdf')) {
+        return (
+          <div className="doc-preview">
+            <iframe src={docRef} title="doc-preview" />
+          </div>
+        );
+      }
+      return (
+        <div className="doc-preview">
+          <img src={docRef} alt="doc-preview" />
+        </div>
+      );
+    }
+
+    // if it contains pdf extension, still attempt show as iframe if remote
+    if (lower.includes('.pdf')) {
+      return (
+        <div className="doc-preview">
+          <iframe src={docRef} title="doc-preview" />
+        </div>
+      );
+    }
+
+    // fallback: show as text reference
+    return <div className="doc-preview"><p>{docRef}</p></div>;
+  };
+
   if (loading) return <div className="container"><p>Loading...</p></div>;
 
   return (
@@ -106,12 +138,20 @@ const KYCVerify = () => {
               <p><strong>Address:</strong> {selectedCust.address?.street}, {selectedCust.address?.city}</p>
               <p><strong>ID Type:</strong> {selectedCust.kyc?.idType}</p>
               <p><strong>ID Number:</strong> {selectedCust.kyc?.idNumber}</p>
-              <p><strong>ID Document:</strong> {selectedCust.kyc?.idDocument || 'N/A'}</p>
-              <textarea
-                placeholder="Enter rejection reason (if rejecting)"
-                value={rejectionReason}
-                onChange={(e) => setRejectionReason(e.target.value)}
-              />
+              <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ flex: 1 }}>
+                  <p><strong>ID Document:</strong></p>
+                  {renderDocumentPreview(selectedCust.kyc?.idDocument)}
+                </div>
+                <div style={{ width: 320 }}>
+                  <label style={{ fontWeight: 600, display: 'block', marginBottom: 6 }}>Rejection reason</label>
+                  <textarea
+                    placeholder="Enter rejection reason (if rejecting)"
+                    value={rejectionReason}
+                    onChange={(e) => setRejectionReason(e.target.value)}
+                  />
+                </div>
+              </div>
             </div>
             <div className="modal-actions">
               <button className="btn-approve" onClick={() => handleApprove(selectedCust._id)}>
