@@ -1,0 +1,7 @@
+.container { padding: 16px; }
+.approvals-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.approval-card { border:1px solid #eee; padding:12px; border-radius:6px; background:#fff; }
+.approval-actions { margin-top:8px; }
+.btn { padding:6px 10px; border-radius:4px; cursor:pointer; }
+.btn-approve { background:#28a745; color:#fff; border:none; }
+.btn-reject { background:#dc3545; color:#fff; border:none; }

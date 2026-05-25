@@ -55,6 +55,56 @@ npm run server
 npm start
 ```
 
+## Deployment Guide
+
+### Backend on Render
+
+1. Create a new **Web Service** on Render and connect this GitHub repository.
+2. Set the **Root Directory** to `backend`.
+3. Use these values for the service:
+
+```text
+Build Command: npm install
+Start Command: npm start
+```
+
+4. Add the following environment variables in Render:
+
+```env
+PORT=5000
+MONGO_URI=<your-mongodb-connection-string>
+JWT_SECRET=<your-strong-secret>
+CLIENT_URL=<your-netlify-site-url>
+```
+
+5. Deploy the service and copy the Render backend URL.
+
+### Frontend on Netlify
+
+1. Create a new site on Netlify and connect the same GitHub repository.
+2. Set the **Base directory** to `frontend`.
+3. Use these build settings:
+
+```text
+Build command: npm run build
+Publish directory: build
+```
+
+4. Add this environment variable in Netlify:
+
+```env
+REACT_APP_API_URL=https://express-banking-system.onrender.com/api
+```
+
+5. Deploy the site and verify it can reach the backend API.
+
+### Important Deployment Notes
+
+- Update `CLIENT_URL` in the backend to the final Netlify domain so CORS works correctly.
+- Keep `REACT_APP_API_URL` pointed to the deployed backend, not localhost.
+- If you change the frontend domain later, update the backend environment variable again.
+- MongoDB must be reachable from Render, so use MongoDB Atlas or another hosted MongoDB instance.
+
 ## API Overview
 
 ### Auth

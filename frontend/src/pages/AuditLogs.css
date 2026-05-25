@@ -1,0 +1,13 @@
+.container {
+  padding: 16px;
+}
+.logs-table-wrapper { overflow: auto; }
+.logs-table { width: 100%; border-collapse: collapse; }
+.logs-table th, .logs-table td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+.status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; }
+.status-badge.success { background: #e6ffed; color: #067a3a; }
+.status-badge.failed { background: #ffe6e6; color: #a11; }
+.filter-bar { margin: 8px 0 12px; }
+.filter-input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+.error-box { color: #a11; background: #fff0f0; padding: 8px; border-radius: 4px; }
+.empty-state { padding: 12px; color: #666; }

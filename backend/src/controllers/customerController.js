@@ -157,6 +157,10 @@ exports.startKYC = async (req, res, next) => {
     const { customerId } = req.params;
     const { idType, idNumber, idDocument } = req.body;
 
+    if (!idDocument || !String(idDocument).trim()) {
+      return res.status(400).json({ message: 'ID document reference is required' });
+    }
+
     const customer = await Customer.findById(customerId);
     if (!customer) {
       return res.status(404).json({ message: 'Customer not found' });

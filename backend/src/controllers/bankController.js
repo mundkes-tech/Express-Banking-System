@@ -137,7 +137,6 @@ const processTransaction = async (transaction) => {
       await Promise.all([from.save(), to.save()]);
     }
 
-    transaction.status = 'approved';
     transaction.status = 'success';
     transaction.processedAt = new Date();
     transaction.failureReason = '';

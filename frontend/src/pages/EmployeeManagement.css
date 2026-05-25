@@ -1,0 +1,16 @@
+.container { padding: 16px; }
+.employee-management { padding: 16px; }
+.cm-subtitle { color: #666; margin-top: 4px; }
+.cm-toolbar { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
+.cm-search { flex: 1; min-width: 240px; padding: 10px 12px; border: 1px solid #d7dce3; border-radius: 8px; }
+.cm-refresh { padding: 10px 14px; border: 1px solid #d7dce3; background: #fff; border-radius: 8px; cursor: pointer; }
+.management-form { border: 1px solid #e5e7eb; background: #fff; border-radius: 12px; padding: 14px; display: grid; gap: 10px; margin-bottom: 18px; }
+.management-form input, .management-form select { padding: 10px 12px; border: 1px solid #d7dce3; border-radius: 8px; }
+.management-form button { border: none; border-radius: 8px; padding: 10px 14px; background: #0f6bff; color: #fff; cursor: pointer; }
+.checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
+.employees-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 12px; }
+.employee-card { border: 1px solid #eee; padding: 12px; border-radius: 10px; background: #fff; }
+.card-header { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.employee-id { color: #666; margin-top: 4px; }
+.status-badge { padding: 4px 8px; border-radius: 999px; font-size: 0.8rem; background: #eef2f7; }
+

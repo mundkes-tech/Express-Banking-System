@@ -1,0 +1,8 @@
+.container { padding: 16px; }
+.reports-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 12px; }
+.card { border:1px solid #eee; padding:12px; border-radius:6px; background:#fff; }
+.report-section { margin-top: 18px; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px; background: #fff; }
+.by-type-list { display: grid; gap: 8px; margin-top: 10px; }
+.by-type-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+.report-meta { margin-top: 12px; color: #666; }
+

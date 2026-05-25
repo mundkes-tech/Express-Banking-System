@@ -1,0 +1,20 @@
+.customer-management { padding: 16px; }
+.cm-header { margin-bottom: 12px; }
+.cm-toolbar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.cm-search { flex: 1; min-width: 240px; padding: 10px 12px; border: 1px solid #d7dce3; border-radius: 8px; }
+.cm-refresh { padding: 10px 14px; border: 1px solid #d7dce3; background: #fff; border-radius: 8px; cursor: pointer; }
+.customers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 12px; }
+.customer-card { border: 1px solid #eee; padding: 12px; border-radius: 6px; background: #fff; }
+.card-header { display:flex; justify-content:space-between; align-items:center; }
+.status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
+.no-data { color:#666; }
+.cm-subtitle { color:#666; margin-top:4px; }
+.customer-edit-form { display: grid; gap: 8px; margin: 10px 0; }
+.customer-edit-form input { padding: 9px 10px; border: 1px solid #d7dce3; border-radius: 8px; }
+.two-col-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.customer-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.action-btn { border: none; border-radius: 8px; padding: 9px 12px; cursor: pointer; }
+.action-btn.primary { background: #0f6bff; color: #fff; }
+.action-btn.secondary { background: #eef2f7; color: #1f2a37; }
+.kyc-badge { padding: 3px 8px; border-radius: 999px; background: #eef2f7; }
+
