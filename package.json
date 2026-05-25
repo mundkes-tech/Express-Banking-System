@@ -25,20 +25,18 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cross-env PORT=3000 react-scripts start",
-    "server": "nodemon src/server/server.js",
-    "dev": "concurrently \"npm run server\" \"npm start\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "seed:admin": "node src/scripts/seedAdmin.js"
+    "start": "npm --prefix frontend start",
+    "server": "npm --prefix backend run dev",
+    "dev": "npm run dev:backend",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "test": "npm --prefix frontend test",
+    "eject": "npm --prefix frontend eject",
+    "seed:admin": "npm --prefix backend run seed:admin",
+    "fix:admin": "npm --prefix backend run fix:admin"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
+  
   "browserslist": {
     "production": [
       ">0.2%",

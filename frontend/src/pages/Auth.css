@@ -1,0 +1,4 @@
+.auth-container { max-width: 480px; margin: 24px auto; padding: 16px; border: 1px solid #eee; border-radius: 8px; }
+.auth-form input, .auth-form button { width: 100%; padding: 8px; margin: 8px 0; }
+.auth-note { font-size: 0.9rem; color: #666; }
+.quick-buttons button { margin-right: 8px; }
