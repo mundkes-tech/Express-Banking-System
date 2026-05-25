@@ -153,7 +153,10 @@ const refreshAccessToken = async (req, res, next) => {
 // Development-only quick login: issues tokens for the first active employee matching role
 const quickLogin = async (req, res, next) => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      process.env.ENABLE_QUICK_LOGIN !== 'true'
+    ) {
       return res.status(403).json({ message: 'Quick login is disabled in production' });
     }
 
