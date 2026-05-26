@@ -1,131 +1,221 @@
 # Express Banking System
 
-A full-stack banking system built with React, Express, and MongoDB with JWT authentication, validated APIs, and persistent transaction history.
+A full-stack example banking system: React frontend, Express API, MongoDB persistence, and JWT-based authentication.
+
+---
+
+Table of Contents
+- [About](#about)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Quick Start (interactive)](#quick-start-interactive)
+- [Environment Variables](#environment-variables)
+- [Running & Scripts](#running--scripts)
+- [API Overview](#api-overview)
+- [Database & Seeders](#database--seeders)
+- [Architecture & DFDs](#architecture--dfds)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [FAQ](#faq)
+
+---
+
+## About
+
+This repo implements a simplified banking platform with user accounts, transactions, deposits, withdrawals, and role-based features for employees/managers. It's useful as a learning project, demo, or starting point for production work after hardening and auditing.
 
 ## Features
 
-- User registration and login with hashed passwords and JWT auth
-- Protected banking APIs (per-user account ownership)
-- Create account with account type (SAVINGS/CHECKING)
-- Dashboard listing account number, type, status, and balance
-- Transfer funds between your own accounts
-- Deposit and withdraw operations
-- Balance lookup and transaction history
-- Account update and delete endpoints
-- Security middleware: helmet, rate limiting, validation, request logging
+- User registration/login with hashed passwords and JWT
+- Account creation (SAVINGS / CHECKING) and per-account operations
+- Transfer funds, deposit, withdraw, and transaction history
+- Role-based routes (employee, manager) and protected endpoints
+- Input validation, rate limiting, and basic audit logging
 
 ## Tech Stack
 
 - Frontend: React, React Router, Axios
-- Backend: Node.js, Express.js
+- Backend: Node.js, Express
 - Database: MongoDB (Mongoose)
-- Auth/Security: JWT, bcryptjs, helmet, express-rate-limit, express-validator
+- Auth: JWT, bcryptjs
+- Dev & Tools: nodemon, dotenv
 
-## Environment Setup
+## Quick Start (interactive)
 
-1. Copy `.env.example` to `.env`
-2. Configure values:
+1. Copy the example env and install dependencies:
+
+```bash
+cp .env.example .env
+npm install
+```
+
+2. Start development server (backend + frontend if configured):
+
+```bash
+npm run dev
+```
+
+3. Quick interactive checks
+- Open `http://localhost:3000` in your browser to use the UI.
+- Use the API with `curl` or Postman. Example login flow:
+
+```bash
+# Register (if you don't have a user)
+curl -X POST http://localhost:5000/api/auth/register \
+	-H "Content-Type: application/json" \
+	-d '{"name":"Alice","email":"alice@example.com","password":"Password123"}'
+
+# Login
+curl -X POST http://localhost:5000/api/auth/login \
+	-H "Content-Type: application/json" \
+	-d '{"email":"alice@example.com","password":"Password123"}'
+```
+
+After login you'll receive a JWT; add it to `Authorization: Bearer <token>` for protected endpoints.
+
+Tip: set `ENABLE_QUICK_LOGIN=true` in `.env` to enable any built-in quick-login helper (if implemented).
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and edit values. Reference (from `.env.example`):
 
 ```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/express_bank
 JWT_SECRET=replace_with_strong_secret
 CLIENT_URL=http://localhost:3000
-REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_API_URL=https://express-banking-system.onrender.com/api
+ENABLE_QUICK_LOGIN=false
 ```
 
-## Run Locally
+Security: never commit secrets. Use a secrets manager or CI environment variables in production.
 
-Install dependencies:
+## Running & Scripts
+
+- `npm install` — install dependencies
+- `npm run dev` — start both backend and frontend in dev mode (if configured)
+- `npm run server` — start backend only
+- `npm start` — start production server
+- `npm run seed` — run project seeders (see `scripts/`)
+
+Example: start server locally
 
 ```bash
 npm install
-```
-
-Run backend + frontend together:
-
-```bash
-npm run dev
-```
-
-Or run separately:
-
-```bash
 npm run server
-npm start
 ```
-
-## Deployment Guide
-
-### Backend on Render
-
-1. Create a new **Web Service** on Render and connect this GitHub repository.
-2. Set the **Root Directory** to `backend`.
-3. Use these values for the service:
-
-```text
-Build Command: npm install
-Start Command: npm start
-```
-
-4. Add the following environment variables in Render:
-
-```env
-PORT=5000
-MONGO_URI=<your-mongodb-connection-string>
-JWT_SECRET=<your-strong-secret>
-CLIENT_URL=<your-netlify-site-url>
-```
-
-5. Deploy the service and copy the Render backend URL.
-
-### Frontend on Netlify
-
-1. Create a new site on Netlify and connect the same GitHub repository.
-2. Set the **Base directory** to `frontend`.
-3. Use these build settings:
-
-```text
-Build command: npm run build
-Publish directory: build
-```
-
-4. Add this environment variable in Netlify:
-
-```env
-REACT_APP_API_URL=https://express-banking-system.onrender.com/api
-```
-
-5. Deploy the site and verify it can reach the backend API.
-
-### Important Deployment Notes
-
-- Update `CLIENT_URL` in the backend to the final Netlify domain so CORS works correctly.
-- Keep `REACT_APP_API_URL` pointed to the deployed backend, not localhost.
-- If you change the frontend domain later, update the backend environment variable again.
-- MongoDB must be reachable from Render, so use MongoDB Atlas or another hosted MongoDB instance.
 
 ## API Overview
 
-### Auth
+Authentication
 
-- `POST /api/auth/register`
-- `POST /api/auth/login`
+- `POST /api/auth/register` — register new user
+- `POST /api/auth/login` — login and receive JWT
 
-### Bank (Protected: Bearer token required)
+Bank endpoints (require `Authorization: Bearer <token>`)
 
-- `POST /api/bank/create`
-- `GET /api/bank/accounts`
-- `POST /api/bank/transfer`
-- `POST /api/bank/deposit`
-- `POST /api/bank/withdraw`
-- `GET /api/bank/balance/:accountNumber`
-- `GET /api/bank/transactions/:accountNumber`
-- `PATCH /api/bank/accounts/:accountNumber`
-- `DELETE /api/bank/accounts/:accountNumber`
+- `POST /api/bank/create` — create an account
+- `GET /api/bank/accounts` — list user's accounts
+- `POST /api/bank/transfer` — transfer between accounts
+- `POST /api/bank/deposit` — deposit funds
+- `POST /api/bank/withdraw` — withdraw funds
+- `GET /api/bank/balance/:accountNumber` — get balance
+- `GET /api/bank/transactions/:accountNumber` — transaction history
 
-## Notes
+For full request/response shapes, inspect the controllers in `controllers/` and models in `models/`.
 
-- Backend data is now persistent in MongoDB.
-- All bank operations are scoped to the authenticated user.
-- Frontend routes for account actions are protected via login.
+## Database & Seeders
+
+- Local DB: set `MONGO_URI` to your local MongoDB instance.
+- Seed admin user:
+
+```bash
+node scripts/seedAdmin.js
+```
+
+- Fix admin role if needed:
+
+```bash
+node scripts/fixAdminRole.js
+```
+
+## Architecture & DFDs
+
+High-level data flow (Level 0):
+
+```mermaid
+flowchart LR
+	A[User Browser] -->|HTTP| B(React Frontend)
+	B -->|REST / JWT| C(Express API)
+	C -->|CRUD| D[(MongoDB)]
+	C -->|writes| E[(Audit Logs)]
+	F[Admin/Employee] -->|JWT| C
+```
+
+Component diagram (simplified):
+
+```mermaid
+graph TD
+	subgraph Frontend
+		FE[React App]
+	end
+	subgraph Backend
+		API[Express API]
+		Auth[Auth Controller]
+		Bank[Bank Controller]
+		Models[Mongoose Models]
+	end
+	FE -->|axios| API
+	API --> Models
+	API -->|auth checks| Auth
+	API --> Bank
+	Models --> D[(MongoDB)]
+```
+
+Sequence (create account):
+
+```mermaid
+sequenceDiagram
+	participant U as User
+	participant FE as Frontend
+	participant API as Server
+	participant DB as MongoDB
+
+	U->>FE: Submit create account form
+	FE->>API: POST /api/bank/create (JWT)
+	API->>DB: Insert account document
+	DB-->>API: OK
+	API-->>FE: 201 Created
+	FE-->>U: Show success
+```
+
+These diagrams are editable — you can paste them into Mermaid live editor for tweaks.
+
+## Testing
+
+- Unit / integration tests: see `src` and `server` tests (if any)
+- To run prepared tests (when present):
+
+```bash
+npm test
+```
+
+## Contributing
+
+- Fork the repo, create a feature branch, open a PR with tests and a clear description.
+- Keep commits small and focussed. Use conventional commit messages if possible.
+
+## FAQ
+
+- Q: Where are environment settings?
+- A: See `.env.example` at the project root.
+
+---
+
+If you'd like, I can also:
+
+- generate a Postman collection from the API routes
+- add a dedicated `docs/` folder with rendered Mermaid diagrams and PNG exports
+- create GitHub Actions to run tests and lint on PRs
+
+Which of these would you like next?
